@@ -3,6 +3,12 @@ package core
 import (
 	"bytes"
 	"fmt"
+	"os"
+	"strconv"
+
+	"os"
+	"strconv"
+
 	"github.com/atotto/clipboard"
 	"github.com/danielmiessler/fabric/common"
 	"github.com/danielmiessler/fabric/db"
@@ -16,11 +22,10 @@ import (
 	"github.com/danielmiessler/fabric/vendors/ollama"
 	"github.com/danielmiessler/fabric/vendors/openai"
 	"github.com/danielmiessler/fabric/vendors/openrouter"
+	"github.com/danielmiessler/fabric/vendors/poe"
 	"github.com/danielmiessler/fabric/vendors/siliconcloud"
 	"github.com/danielmiessler/fabric/youtube"
 	"github.com/pkg/errors"
-	"os"
-	"strconv"
 )
 
 const DefaultPatternsGitRepoUrl = "https://github.com/danielmiessler/fabric.git"
@@ -64,7 +69,7 @@ func NewFabricBase(db *db.Db) (ret *Fabric) {
 		"Enter the index the name of your default model")
 
 	ret.VendorsAll.AddVendors(openai.NewClient(), azure.NewClient(), ollama.NewClient(), groq.NewClient(),
-		gemini.NewClient(), anthropic.NewClient(), siliconcloud.NewClient(), openrouter.NewClient(), mistral.NewClient(), dryrun.NewClient())
+		gemini.NewClient(), anthropic.NewClient(), siliconcloud.NewClient(), openrouter.NewClient(), mistral.NewClient(), dryrun.NewClient(), poe.NewClient())
 
 	return
 }
