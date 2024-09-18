@@ -3,12 +3,14 @@ package poe
 import (
 	"context"
 	"encoding/json"
-	"errors"
+
+	// "errors"
 	"fmt"
-	"image/jpeg"
+	// "image/jpeg"
 	"io/ioutil"
 	"net/http"
-	"strings"
+
+	// "strings"
 	"time"
 
 	"github.com/danielmiessler/fabric/common"
@@ -17,13 +19,13 @@ import (
 // TODO: later refactor all the below utils to a different package
 
 type PoeClient struct {
-	BaseURL 	string
-	HTTPClient 	*http.Client
+	BaseURL    string
+	HTTPClient *http.Client
 }
 
 func NewPoeClient() *PoeClient {
 	return &PoeClient{
-		BaseURL: "http://127.0.0.1:8000",
+		BaseURL:    "http://127.0.0.1:8000",
 		HTTPClient: &http.Client{},
 	}
 }
@@ -59,11 +61,12 @@ func (p *PoeClient) ListModels(ctx context.Context) ([]string, error) {
 
 	return models, nil
 }
+
 // END TODO
 
 type Client struct {
 	*common.Configurable
-	ApiKey *common.SetupQuestion
+	ApiKey    *common.SetupQuestion
 	ApiClient *PoeClient
 }
 
@@ -72,8 +75,8 @@ func NewClient() (ret *Client) {
 	ret = &Client{}
 
 	ret.Configurable = &common.Configurable{
-		Label:			vendorName,
-		EnvNamePrefix:	common.BuildEnvVariablePrefix(vendorName),
+		Label:         vendorName,
+		EnvNamePrefix: common.BuildEnvVariablePrefix(vendorName),
 	}
 
 	ret.ApiKey = ret.Configurable.AddSetupQuestion("API key", true)
