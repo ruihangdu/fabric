@@ -44,7 +44,7 @@ func (p *PoeClient) ListModels(ctx context.Context) ([]string, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("received non-OK ListModels response: %w", resp.StatusCode)
+		return nil, fmt.Errorf("received non-OK ListModels response: %d", resp.StatusCode)
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
@@ -228,10 +228,7 @@ func toMessages(msgs []*common.Message) (messages []*Message) {
 	return
 }
 
-func (o *Client) Send(msgs []*common.Message, opts *common.ChatOptions) (ret string, err error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
-	defer cancel()
-
+func (o *Client) Send(ctx context.Context, msgs []*common.Message, opts *common.ChatOptions) (ret string, err error) {
 	ret, err = o.ApiClient.SendMessages(ctx, o.ApiKey.Value, opts.Model, toMessages(msgs))
 	return
 }
