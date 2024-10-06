@@ -6,9 +6,6 @@ import (
 	"os"
 	"strconv"
 
-	"os"
-	"strconv"
-
 	"github.com/atotto/clipboard"
 	"github.com/danielmiessler/fabric/common"
 	"github.com/danielmiessler/fabric/db"
